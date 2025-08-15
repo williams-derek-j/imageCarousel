@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex-direction: row;
+
+    width: 99vw;
+    height: 98vh;
+
+    background-color: black;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+
+    box-sizing: border-box;
+    width: 90%;
+
+    overflow-x: scroll;
+
+    background-color: goldenrod;
+    padding: 2%;
+}
