@@ -51,6 +51,7 @@ body {
 #content > .carouselContainer > .carousel {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-self: center;
 
     height: 95%;
@@ -62,6 +63,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+
     height: 95%;
     width: 33%;
 }

@@ -17,6 +17,7 @@ export function renderHorse(horse, container) {
 
 export function renderCarousel(carousel, container) {
     const carouselContainer = document.createElement('div');
+    // carouselContainer.className = 'carouselContainer';
     carouselContainer.classList.add('carouselContainer');
 
     const carouselRender = document.createElement('div');
@@ -26,8 +27,11 @@ export function renderCarousel(carousel, container) {
 
     const maxImages = 1;
     let i = 0;
+    let horseActive;
     carousel.barn.forEach((horse) => {
         if (i < maxImages) {
+            horseActive = horse;
+
             renderHorse(horse, carouselRender);
         }
         i++;
@@ -49,12 +53,15 @@ export function renderCarousel(carousel, container) {
                 if (index < 0) {
                     index = carousel.barn.length - 1;
                 }
+                horse.dot.classList.remove('selected');
             }
             i++;
         })
         let prev;
         if (index || index === 0) {
             prev = carousel.barn[index]
+
+            prev.dot.classList.add('selected');
         }
         renderHorse(prev, carouselRender);
     })
@@ -82,6 +89,12 @@ export function renderCarousel(carousel, container) {
             clear(carouselRender)
             renderHorse(horse, carouselRender);
         })
+        horse.dot = dot;
+
+        if (horse === horseActive) {
+            horse.dot.classList.add('selected');
+        }
+
         nav.appendChild(dot);
     })
     carouselContainer.appendChild(nav);
@@ -104,12 +117,16 @@ export function renderCarousel(carousel, container) {
                 if (index > carousel.barn.length - 1) {
                     index = 0;
                 }
+
+                horse.dot.classList.remove('selected');
             }
             i++;
         })
         let next;
         if (index || index === 0) {
             next = carousel.barn[index]
+
+            next.dot.classList.add('selected');
         }
         renderHorse(next, carouselRender);
     })
