@@ -41,7 +41,14 @@ body {
     justify-content: flex-end;
 }
 
-#content > .carousel {
+#content > .carouselContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content > .carouselContainer > .carousel {
     display: flex;
     flex-direction: row;
     align-self: center;
@@ -51,7 +58,7 @@ body {
     box-sizing: border-box;
 }
 
-#content > .carousel > .horse {
+#content > .carouselContainer > .carousel > .horse {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -59,10 +66,33 @@ body {
     width: 33%;
 }
 
-#content > .carousel > .horse > .image {
+#content > .carouselContainer > .carousel > .horse > .image {
     max-height: 100%;
     max-width: 100%;
 
     margin-left: auto;
     margin-right: auto;
+}
+
+#content > .carouselContainer > .nav {
+    display: flex;
+    flex-direction: row;
+
+    height: 25%;
+    width: 25%;
+}
+
+#content > .carouselContainer > .nav > .dot {
+    margin-left: 5%;
+    margin-right: 5%;
+
+    height: 100%;
+    width: 25%;
+
+    background-color: black;
+}
+
+#content > .carouselContainer > .nav > .dot.selected {
+    height: 100%;
+    width: 50%;
 }

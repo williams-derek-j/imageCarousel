@@ -1,3 +1,4 @@
+import clear from "./clear.js"
 import Horse from './horse.js'
 
 export function renderHorse(horse, container) {
@@ -15,53 +16,102 @@ export function renderHorse(horse, container) {
 }
 
 export function renderCarousel(carousel, container) {
-    const carouselRender = document.createElement('div');
-    carouselRender.className = 'carousel';
-    carousel.setRender(carouselRender);
+    const carouselContainer = document.createElement('div');
+    carouselContainer.classList.add('carouselContainer');
 
+    const carouselRender = document.createElement('div');
+    carouselRender.classList.add('carousel');
+    carousel.setRender(carouselRender);
+    carouselContainer.appendChild(carouselRender);
+
+    const maxImages = 1;
+    let i = 0;
     carousel.barn.forEach((horse) => {
-        renderHorse(horse, carouselRender);
+        if (i < maxImages) {
+            renderHorse(horse, carouselRender);
+        }
+        i++;
     });
 
     const arrowLeft = document.createElement('div');
-    arrowLeft.className = 'arrow left';
+    arrowLeft.classList.add('arrow');
+    arrowLeft.classList.add('left');
     arrowLeft.textContent = "<";
     arrowLeft.addEventListener('click', (event) => {
-        // scrollIntoView previous image in carousel
+        const currentRender = carouselRender.querySelector('.horse');
+        clear(carouselRender);
+
+        let i = 0;
+        let index;
+        carousel.barn.forEach((horse) => {
+            if (horse.render === currentRender) {
+                index = i - 1;
+                if (index < 0) {
+                    index = carousel.barn.length - 1;
+                }
+            }
+            i++;
+        })
+        let prev;
+        if (index || index === 0) {
+            prev = carousel.barn[index]
+        }
+        renderHorse(prev, carouselRender);
     })
     container.appendChild(arrowLeft);
 
     const nav = document.createElement('div');
-    nav.className = 'nav';
+    nav.classList.add('nav');
 
     const dots = [];
-    for (let horse in carousel.barn) {
+    carousel.barn.forEach((horse) => {
         const dot = document.createElement('div');
-        dot.className = 'dot';
+        dot.className = ('dot');
         dot.addEventListener('click', (event) => {
             if (dots.length > 0) {
-                for (let dot in dots) {
-                    if (dot.classList.contains('selected')) {
+                dots.forEach((dot) => {
+                    const name = dot.className;
+                    if (name.includes('selected')) {
                         dot.classList.remove('selected');
                     }
-                }
+                })
             }
             dot.classList.add('selected');
             dots.push(dot);
 
-            horse.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'})
+            clear(carouselRender)
+            renderHorse(horse, carouselRender);
         })
         nav.appendChild(dot);
-    }
-    carouselRender.appendChild(nav);
+    })
+    carouselContainer.appendChild(nav);
 
-    container.appendChild(carouselRender);
+    container.appendChild(carouselContainer);
 
     const arrowRight = document.createElement('div');
-    arrowRight.className = 'arrow right';
+    arrowRight.classList.add('arrow');
+    arrowRight.classList.add('right');
     arrowRight.textContent = ">";
     arrowRight.addEventListener('click', (event) => {
-        // scrollIntoView next image in carousel
+        const currentRender = carouselRender.querySelector('.horse');
+        clear(carouselRender);
+
+        let i = 0;
+        let index;
+        carousel.barn.forEach((horse) => {
+            if (horse.render === currentRender) {
+                index = i + 1;
+                if (index > carousel.barn.length - 1) {
+                    index = 0;
+                }
+            }
+            i++;
+        })
+        let next;
+        if (index || index === 0) {
+            next = carousel.barn[index]
+        }
+        renderHorse(next, carouselRender);
     })
     container.appendChild(arrowRight);
 }
