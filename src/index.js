@@ -10,6 +10,8 @@ const content = document.querySelector('#content');
 
 const images = new Carousel()
 const image1 = images.imageAdd(cat1, 'cat1')
+const image2 = images.imageAdd(cat2, 'cat2')
+const image3 = images.imageAdd(cat3, 'cat3')
 
 renderCarousel(images, content);
 

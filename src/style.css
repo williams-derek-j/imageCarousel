@@ -1,6 +1,6 @@
 body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     width: 99vw;
     height: 98vh;
@@ -13,10 +13,56 @@ body {
     flex-direction: row;
 
     box-sizing: border-box;
-    width: 90%;
+    width: 95%;
 
     overflow-x: scroll;
 
     background-color: goldenrod;
     padding: 2%;
+}
+
+#content > .arrow {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+
+    height: 25%;
+    width: 25%;
+
+    font-size: xxx-large;
+    font-weight: bolder;
+}
+
+#content > .arrow.left {
+    justify-content: flex-start;
+}
+
+#content > .arrow.right {
+    justify-content: flex-end;
+}
+
+#content > .carousel {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+
+    height: 95%;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+#content > .carousel > .horse {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 95%;
+    width: 33%;
+}
+
+#content > .carousel > .horse > .image {
+    max-height: 100%;
+    max-width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
 }

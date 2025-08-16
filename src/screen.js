@@ -29,15 +29,7 @@ export function renderCarousel(carousel, container) {
     arrowLeft.addEventListener('click', (event) => {
         // scrollIntoView previous image in carousel
     })
-    carouselRender.appendChild(arrowLeft);
-
-    const arrowRight = document.createElement('div');
-    arrowRight.className = 'arrow right';
-    arrowRight.textContent = ">";
-    arrowRight.addEventListener('click', (event) => {
-        // scrollIntoView next image in carousel
-    })
-    carouselRender.appendChild(arrowRight);
+    container.appendChild(arrowLeft);
 
     const nav = document.createElement('div');
     nav.className = 'nav';
@@ -64,4 +56,12 @@ export function renderCarousel(carousel, container) {
     carouselRender.appendChild(nav);
 
     container.appendChild(carouselRender);
+
+    const arrowRight = document.createElement('div');
+    arrowRight.className = 'arrow right';
+    arrowRight.textContent = ">";
+    arrowRight.addEventListener('click', (event) => {
+        // scrollIntoView next image in carousel
+    })
+    container.appendChild(arrowRight);
 }
