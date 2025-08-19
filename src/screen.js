@@ -1,5 +1,35 @@
 import clear from "./clear.js"
-import Horse from './horse.js'
+import { events } from "./events.js"
+
+export function renderDropdown(objectsArray, container) {
+    const dropdownContainer = document.createElement("div");
+    dropdownContainer.classList.add("dropdownContainer");
+    dropdownContainer.innerHTML = document.createElement("span").textContent = "Images";
+
+    const droppedContainer = document.createElement("div");
+    droppedContainer.classList.add("droppedContainer");
+
+    objectsArray.forEach((object) => {
+        const listItemContainer = document.createElement('div');
+        listItemContainer.classList.add("listItemContainer");
+
+        listItemContainer.append(document.createElement("span").textContent = object.alt);
+
+        listItemContainer.addEventListener("click", (event) => {
+            events.emit('dropdownItemClicked', object);
+        })
+
+        droppedContainer.appendChild(listItemContainer);
+    })
+    dropdownContainer.append(droppedContainer);
+
+    dropdownContainer.addEventListener("click", (event) => {
+        droppedContainer.classList.toggle("selected");
+    })
+
+    container.appendChild(dropdownContainer);
+}
+
 
 export function renderHorse(horse, container) {
     const horseRender = document.createElement('div');
@@ -17,7 +47,6 @@ export function renderHorse(horse, container) {
 
 export function renderCarousel(carousel, container) {
     const carouselContainer = document.createElement('div');
-    // carouselContainer.className = 'carouselContainer';
     carouselContainer.classList.add('carouselContainer');
 
     const carouselRender = document.createElement('div');
