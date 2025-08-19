@@ -113,7 +113,6 @@ export function renderCarousel(carousel, container) {
                 })
             }
             dot.classList.add('selected');
-            dots.push(dot);
 
             clear(carouselRender)
             renderHorse(horse, carouselRender);
@@ -124,8 +123,20 @@ export function renderCarousel(carousel, container) {
             horse.dot.classList.add('selected');
         }
 
+        dots.push(dot);
         nav.appendChild(dot);
     })
+    events.on('dropdownItemClicked', (horse) => {
+        dots.forEach((dot) => {
+            const name = dot.className;
+            if (name.includes('selected')) {
+                dot.classList.remove('selected');
+            }
+        })
+
+        horse.dot.classList.add('selected');
+    })
+
     carouselContainer.appendChild(nav);
 
     container.appendChild(carouselContainer);
